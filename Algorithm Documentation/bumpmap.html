@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mapping a Bump</title>
+</head>
+
+<body>
+<h2>Placing the Bump</h2>
+<p>The bump created at O(0,0,0) by changing the normals of various points to get the bump. It is then translated to Q(0,0,1). Next we consider the vector to any point P(x,y,z) on the sphere. We calculate the cross product of OQ and OP to get the normal vector N of the plane formed by the points O, P and Q. Then we calculate the angle between OQ and OP in the plane using the formula for dot product of OQ and OP. Next we do rotation transformation by that angle about the N axis. Thus the bump is now placed and correctly aligned for the point P(x,y,z). We do this for some more points to get some kind of a symmetry or randomly.</p>
+<br>
+<br>
+<h2>Symmetric Bumps</h2>
+<p>Symmetically Bumps are placed on the sphere to get the appropriate result</p>
+<br>
+<br>
+<h2>Random Bumps</h2>
+<p>The genpos() function randomly generates approriate points on the sphere and also the size and shape of the bump. Using these values in the pos[][] array these bumps are generated and scaled randomly in the x and y direction to make them elliptical.</p> </p>
+<br>
+<br>
+<h2>Results</h2>
+<img src="pics/bump1.png" width="600" height="600" alt="bump1">
+<img src="pics/bump2.png" width="600" height="600" alt="bump1">
+<br>
+<br>
+<h2>Remarks</h2>
+<p>The output we get here is very symmetric and asthetic. Moreover, It takes over half a second to generate these bumps and hence is time consuming. It is important to note that this may not be the best implementation but is one way to get the required output.
+</body>
+</html>

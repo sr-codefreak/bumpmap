@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mapping a Texture</title>
+</head>
+
+<body>
+<h2>Generation of farray</h2>
+<p>We downloaded the texture for free from the internet. We decided to take the first 100X100 values and make the parameters u and v take the values 0, 0.01, 0.02 and so on upto 0.99. We used OpenCV to process the images and wrote the pixel intensities into the file "gravel.txt" and "abstract970.txt". These values were read and put into farray[][]. 
+<br>
+<br>
+<h2>Generation of the Wrinkled Function</h2>
+<p>The wrinled surface is a combination of the smooth function and the wrinkled function. The wrinkled function F is thus also called the bump displacement function. We could have defined it as a bivariate polynomial or bivariate Fourier series. In order to generate a function with a sufficient amount of complexity to be interesting, an excessive number of coefficients are required. So we have used the table look up farray[][]. F function has the fval values. fval maps the two parameters to an integer value multiplied by a scaling factor. We have introduced this scaling factor as we will be using fu and fv in our calculations. fu and fv are calculated by subtracting two adjacent values of fval and dividing it by the distance between the parameter values. As the distance (E) is 0.01 and the intensity values were from 0 to 255, we have taken the scaling factor as 0.0001. While calculating fval we are actually looking into 4 values in farray[][] and are bilinearly interpolating them. Thus the fval values will not be continuous but that is not a problem as we will be using fu and fv in our calculations.
+<br>
+<br>
+<h2>Parametric Equations</h2>
+The parametric equations for coordinates of a sphere in radical coordinates are:
+<p>x = rcos(θ)sin(ϕ)</p>
+<p>y = rsin(θ)sin(ϕ)</p>
+<p>z = rcos(ϕ)</p>
+where r is the radius of the sphere.
+Taking u as cos(θ) and v as sin(ϕ), we have:
+<p>x = ruv</p>
+<p>y = r√(1-u<sup>2</sup>)v</p>
+<p>z = r√(1-v<sup>2</sup>)</p>
+Note that u and v lie between 0 and 1. 
+Any point P on the surface will be P(x,y,z). We calculated the partial derivatives Pu and Pv. The normal at the point P is also N(x,y,z) as the centre of the sphere is at the origin. It can be verified that N lies in or opposite to the direction of the cross product of Pu and Pv. We have then calculated the new normal newN[] at the point P using the expression given in the paper (N' = N + D). Then we set the normals at the position P(x,y,z) as (newN[0],newN[1],newN[2]) and drew the points. The normals were made of unit length before passing into glNormal3f(). We get the surface as the part of the sphere in the first quadrant as we have taken x,y,z as positive.
+<br>
+<br>
+<h2>Results</h2>
+<img src="pics/texture1.png" width="600" height="600" alt="texture1">
+<br>
+<br>
+<img src="pics/texture2.png" width="600" height="600" alt="texture2">
+<br>
+<br>
+<h2>Remarks</h2>
+<p>We are not able to see the texture mapped onto the surface. Maybe this is because the points are not close enough. When we zoom out a lot, the points become close enough but maybe we are not able to figure out the texture from a distance.
+<br>
+<br>
+<h2>Mapping to a plane</h2>
+<p>We have tried to map the texture onto a square plane of side 0.5 units in expectation that we would be able to see the texture better because of the less surface area. So we have taken x as u/2, y as v/2 and z as 0. We have used "gravel.txt" for the first image and "abstract970.txt" for the second image.
+<br>
+<br>
+<h2>Results</h2>
+<img src="pics/wall1.png" width="600" height="600" alt="wall1">
+<br>
+<br>
+<img src="pics/wall2.png" width="600" height="600" alt="wall2">
+<br>
+<br>
+<h2>Remarks</h2>
+<p>The squares don't look exactly the same as the pictures, but look similar to them. They sure look different from each other.
+</body>
+</html>
